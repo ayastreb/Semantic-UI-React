@@ -15,6 +15,10 @@ const States = () => (
       description='A step can show that a user has completed it.'
       examplePath='elements/Step/States/StepExampleCompleted'
     />
+    <ComponentExample
+      description='A step can show that a user has completed it without an icon.'
+      examplePath='elements/Step/States/StepExampleCompletedWithoutIcon'
+    />
 
     <ComponentExample
       title='Disabled'

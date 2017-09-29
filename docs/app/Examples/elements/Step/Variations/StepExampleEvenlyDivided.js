@@ -1,26 +1,22 @@
 import React from 'react'
 import { Icon, Step } from 'semantic-ui-react'
 
-const StepExampleVertical = () => (
-  <Step.Group vertical>
-    <Step completed>
-      <Icon name='truck' />
+const StepExampleEvenlyDivider = () => (
+  <Step.Group widths={3}>
+    <Step>
+      <Icon icon='truck' />
       <Step.Content>
         <Step.Title>Shipping</Step.Title>
-        <Step.Description>Choose your shipping options</Step.Description>
       </Step.Content>
     </Step>
-
-    <Step completed>
-      <Icon name='payment' />
+    <Step active>
+      <Icon name='credit card' />
       <Step.Content>
         <Step.Title>Billing</Step.Title>
-        <Step.Description>Enter billing information</Step.Description>
       </Step.Content>
     </Step>
-
-    <Step active>
-      <Icon name='info' />
+    <Step disabled>
+      <Icon name='info circle' />
       <Step.Content>
         <Step.Title>Confirm Order</Step.Title>
       </Step.Content>
@@ -28,4 +24,4 @@ const StepExampleVertical = () => (
   </Step.Group>
 )
 
-export default StepExampleVertical
+export default StepExampleEvenlyDivider

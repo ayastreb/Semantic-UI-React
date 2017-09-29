@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { SemanticShorthandCollection } from '../..';
+import { SemanticShorthandCollection, SemanticWIDTHS } from '../..';
 import { StepProps } from './Step';
 
 export interface StepGroupProps {
@@ -8,6 +8,9 @@ export interface StepGroupProps {
 
   /** An element type to render as (string or function). */
   as?: any;
+
+  /** Steps can be attached to other elements. */
+  attached?: boolean | 'bottom' | 'top';
 
   /** Primary content. */
   children?: React.ReactNode;
@@ -35,6 +38,9 @@ export interface StepGroupProps {
 
   /** A step can be displayed stacked vertically. */
   vertical?: boolean;
+
+  /** Steps can be divided evenly inside their parent. */
+  widths?: SemanticWIDTHS;
 }
 
 declare const StepGroup: React.StatelessComponent<StepGroupProps>;

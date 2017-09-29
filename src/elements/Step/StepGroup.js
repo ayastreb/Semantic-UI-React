@@ -10,8 +10,10 @@ import {
   getUnhandledProps,
   META,
   SUI,
-  useValueAndKey,
   useKeyOnly,
+  useKeyOrValueAndKey,
+  useValueAndKey,
+  useWidthProp,
 } from '../../lib'
 import Step from './Step'
 
@@ -20,6 +22,7 @@ import Step from './Step'
  */
 function StepGroup(props) {
   const {
+    attached,
     children,
     className,
     fluid,
@@ -29,6 +32,7 @@ function StepGroup(props) {
     stackable,
     unstackable,
     vertical,
+    widths,
   } = props
   const classes = cx(
     'ui',
@@ -37,23 +41,23 @@ function StepGroup(props) {
     useKeyOnly(ordered, 'ordered'),
     useKeyOnly(unstackable, 'unstackable'),
     useKeyOnly(vertical, 'vertical'),
+    useKeyOrValueAndKey(attached, 'attached'),
     useValueAndKey(stackable, 'stackable'),
+    /* TODO: Check possible values */
+    useWidthProp(widths),
     'steps',
     className,
   )
   const rest = getUnhandledProps(StepGroup, props)
   const ElementType = getElementType(StepGroup, props)
 
-  if (!childrenUtils.isNil(children)) {
-    return <ElementType {...rest} className={classes}>{children}</ElementType>
-  }
+  if (!childrenUtils.isNil(children)) return <ElementType {...rest} className={classes}>{children}</ElementType>
 
-  const content = _.map(items, (item) => {
-    const key = item.key || [item.title, item.description].join('-')
-    return <Step key={key} {...item} />
-  })
-
-  return <ElementType {...rest} className={classes}>{content}</ElementType>
+  return (
+    <ElementType {...rest} className={classes}>
+      {_.map(items, item => Step.create(item))}
+    </ElementType>
+  )
 }
 
 StepGroup._meta = {
@@ -65,6 +69,12 @@ StepGroup._meta = {
 StepGroup.propTypes = {
   /** An element type to render as (string or function). */
   as: customPropTypes.as,
+
+  /** Steps can be attached to other elements. */
+  attached: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.oneOf(['top', 'bottom']),
+  ]),
 
   /** Primary content. */
   children: PropTypes.node,
@@ -92,6 +102,9 @@ StepGroup.propTypes = {
 
   /** A step can be displayed stacked vertically. */
   vertical: PropTypes.bool,
+
+  /** Steps can be divided evenly inside their parent. */
+  widths: PropTypes.oneOf(SUI.WIDTHS),
 }
 
 export default StepGroup

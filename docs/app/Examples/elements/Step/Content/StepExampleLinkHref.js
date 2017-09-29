@@ -1,28 +1,23 @@
 import React from 'react'
-import { Step } from 'semantic-ui-react'
+import { Icon, Step } from 'semantic-ui-react'
 
-const StepExampleOrdered = () => (
-  <Step.Group ordered>
-    <Step completed>
+const StepExampleHref = () => (
+  <Step.Group>
+    <Step active href='http://google.com'>
+      <Icon name='truck' />
       <Step.Content>
         <Step.Title>Shipping</Step.Title>
         <Step.Description>Choose your shipping options</Step.Description>
       </Step.Content>
     </Step>
-
-    <Step completed>
+    <Step href='http://google.com'>
+      <Icon name='credit card' />
       <Step.Content>
         <Step.Title>Billing</Step.Title>
         <Step.Description>Enter billing information</Step.Description>
       </Step.Content>
     </Step>
-
-    <Step active>
-      <Step.Content>
-        <Step.Title>Confirm Order</Step.Title>
-      </Step.Content>
-    </Step>
   </Step.Group>
 )
 
-export default StepExampleOrdered
+export default StepExampleHref
